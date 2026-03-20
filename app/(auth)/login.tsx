@@ -19,7 +19,19 @@ export default function LoginScreen() {
       const res = await authService.login({ email, password });
       await signIn(res.token);
     } catch (e: any) {
-      setError(e?.response?.data?.message || 'Login failed. Please try again.');
+      const msg = e?.response?.data?.message ?? e?.response?.data?.error;
+      const status = e?.response?.status;
+      if (msg) {
+        setError(msg);
+      } else if (e?.code === 'ERR_NETWORK' || !e?.response) {
+        setError('Cannot reach server. Check that the backend is running and EXPO_PUBLIC_API_URL in .env uses your computer\'s IP (not localhost).');
+      } else if (status === 401) {
+        setError('Invalid email or password.');
+      } else if (status) {
+        setError(`Login failed (${status}). Please try again.`);
+      } else {
+        setError('Login failed. Please try again.');
+      }
     } finally {
       setLoading(false);
     }
@@ -56,6 +68,14 @@ export default function LoginScreen() {
         disabled={loading}
       >
         <Text style={styles.buttonText}>{loading ? 'Signing in...' : 'Login'}</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.guestButton}
+        onPress={() => router.replace('/dashboard')}
+        disabled={loading}
+      >
+        <Text style={styles.guestButtonText}>Continue as guest</Text>
       </TouchableOpacity>
 
       <TouchableOpacity onPress={() => router.push('/(auth)/register')}>
@@ -122,5 +142,16 @@ const styles = StyleSheet.create({
   linkBold: {
     color: '#A60000',
     fontWeight: '600',
+  },
+  guestButton: {
+    paddingVertical: 14,
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+  guestButtonText: {
+    color: '#666',
+    fontSize: 15,
+    fontWeight: '600',
+    textDecorationLine: 'underline',
   },
 });

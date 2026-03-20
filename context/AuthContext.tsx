@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
-import * as SecureStore from 'expo-secure-store';
+
+import { storage } from '@/services/storage';
 
 const TOKEN_KEY = 'cc_auth_token';
 
@@ -17,18 +18,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    SecureStore.getItemAsync(TOKEN_KEY)
+    storage
+      .getItem(TOKEN_KEY)
       .then((stored) => setToken(stored))
       .finally(() => setIsLoading(false));
   }, []);
 
   const signIn = async (newToken: string) => {
-    await SecureStore.setItemAsync(TOKEN_KEY, newToken);
+    await storage.setItem(TOKEN_KEY, newToken);
     setToken(newToken);
   };
 
   const signOut = async () => {
-    await SecureStore.deleteItemAsync(TOKEN_KEY);
+    await storage.removeItem(TOKEN_KEY);
     setToken(null);
   };
 

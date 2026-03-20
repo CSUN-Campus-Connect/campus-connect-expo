@@ -2,6 +2,15 @@ import { useEffect } from 'react';
 import { Stack, useRouter, useSegments } from 'expo-router';
 import { AuthProvider, useAuth } from '../context/AuthContext';
 
+export const unstable_settings = {
+  initialRouteName: 'index',
+};
+
+/** Routes that work without a logged-in user (guest mode). */
+function isPublicGuestRoute(segments: string[]): boolean {
+  return segments[0] === 'dashboard' || segments[0] === 'chat';
+}
+
 function RootLayoutNav() {
   const { token, isLoading } = useAuth();
   const segments = useSegments();
@@ -10,7 +19,8 @@ function RootLayoutNav() {
   useEffect(() => {
     if (isLoading) return;
     const inAuthGroup = segments[0] === '(auth)';
-    if (!token && !inAuthGroup) {
+    const guestOnDashboard = isPublicGuestRoute(segments);
+    if (!token && !inAuthGroup && !guestOnDashboard) {
       router.replace('/(auth)/login');
     } else if (token && inAuthGroup) {
       router.replace('/(tabs)');
@@ -19,8 +29,11 @@ function RootLayoutNav() {
 
   return (
     <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="index" options={{ headerShown: false }} />
       <Stack.Screen name="(auth)" />
       <Stack.Screen name="(tabs)" />
+      <Stack.Screen name="dashboard" />
+      <Stack.Screen name="chat" />
     </Stack>
   );
 }
