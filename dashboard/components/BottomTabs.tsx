@@ -23,20 +23,35 @@ const TABS: TabConfig[] = [
 
 type Props = {
   activeTab?: TabId;
+  onMessagesHubPress?: () => void;
 };
 
-export function BottomTabs({ activeTab = 'home' }: Props) {
+export function BottomTabs({ activeTab = 'home', onMessagesHubPress }: Props) {
   const insets = useSafeAreaInsets();
   return (
-    <View style={[styles.container, { paddingBottom: Math.max(insets.bottom, 8) }]}>
+    <View
+      style={[
+        styles.container,
+        {
+          paddingBottom: Math.max(insets.bottom, 10),
+        },
+      ]}
+    >
       {TABS.map((tab) => {
         const isActive = tab.id === activeTab;
         const color = isActive ? DashboardColors.primary : DashboardColors.textMedium;
+        const handlePress = () => {
+          if (tab.id === 'messages' && activeTab === 'messages' && onMessagesHubPress) {
+            onMessagesHubPress();
+            return;
+          }
+          tab.onPress();
+        };
         return (
           <Pressable
             key={tab.id}
             style={({ pressed }) => [styles.tab, pressed && styles.tabPressed]}
-            onPress={tab.onPress}
+            onPress={handlePress}
           >
             <Ionicons
               name={isActive && tab.id === 'home' ? 'home' : tab.icon}
@@ -56,12 +71,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',
-    height: DashboardSpacing.tabBarHeight,
     backgroundColor: DashboardColors.background,
     borderTopWidth: StyleSheet.hairlineWidth,
     borderTopColor: DashboardColors.cardBorder,
-    paddingBottom: 8,
-    paddingTop: 8,
+    paddingTop: 10,
+    minHeight: DashboardSpacing.tabBarHeight,
   },
   tab: {
     flex: 1,

@@ -8,7 +8,7 @@ export const unstable_settings = {
 
 /** Routes that work without a logged-in user (guest mode). */
 function isPublicGuestRoute(segments: string[]): boolean {
-  return segments[0] === 'dashboard' || segments[0] === 'chat';
+  return segments[0] === 'dashboard' || segments[0] === 'chat' || segments[0] === 'messages';
 }
 
 function RootLayoutNav() {
@@ -34,6 +34,7 @@ function RootLayoutNav() {
       <Stack.Screen name="(tabs)" />
       <Stack.Screen name="dashboard" />
       <Stack.Screen name="chat" />
+      <Stack.Screen name="messages" />
     </Stack>
   );
 }

@@ -3,6 +3,10 @@
  * Replace with real endpoints and logic when wiring backend.
  */
 
+import { router } from 'expo-router';
+
+import { requestOpenMessagesInbox } from '@/messages/messagesTabIntent';
+
 export function openSettings(): void {
   console.log('Open settings');
 }
@@ -44,11 +48,12 @@ export function needHelp(): void {
 }
 
 export function goToHome(): void {
-  console.log('Go to Home');
+  router.push('/dashboard');
 }
 
 export function goToMessages(): void {
-  console.log('Go to Messages');
+  requestOpenMessagesInbox();
+  router.navigate('/messages' as never);
 }
 
 export function goToMore(): void {

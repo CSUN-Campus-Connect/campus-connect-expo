@@ -1,12 +1,5 @@
 import { Platform } from 'react-native';
 
-/**
- * Secure token storage. Uses expo-secure-store on iOS/Android (native only).
- * On web, expo-secure-store has no native module and would throw; we fall back
- * to in-memory storage so the app runs. For web token persistence, use
- * AsyncStorage (e.g. install @react-native-async-storage/async-storage) and
- * extend this module.
- */
 const memoryStore: Record<string, string> = {};
 
 async function getItemWeb(key: string): Promise<string | null> {

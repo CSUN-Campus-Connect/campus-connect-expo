@@ -28,6 +28,18 @@
     "plugins": [
       "expo-router",
       [
+        "expo-av",
+        {
+          "microphonePermission": "Allow Campus Connect to record voice messages."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Allow Campus Connect to attach photos to messages."
+        }
+      ],
+      [
         "expo-splash-screen",
         {
           "image": "./assets/images/splash-icon.png",

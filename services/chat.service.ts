@@ -146,9 +146,6 @@ async function sendViaGeminiClient(message: string, history: ChatHistoryItem[]):
   return callGemini({ apiKey: GEMINI_API_KEY, message, history: parsedHistory });
 }
 
-/**
- * Sends a user message and returns the assistant reply (same behavior as web `/api/chat`).
- */
 export async function sendChatMessage(message: string, history: ChatHistoryItem[]): Promise<string> {
   const trimmed = message.trim();
   if (!trimmed) {
