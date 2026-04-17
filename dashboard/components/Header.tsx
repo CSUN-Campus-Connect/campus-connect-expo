@@ -2,6 +2,9 @@ import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
+import { BrandLogo } from '@/components/brand/BrandLogo';
+import { Brand } from '@/constants/brand';
+
 import { openSettings } from '../api';
 import { DashboardColors, DashboardSpacing } from '../styles';
 
@@ -9,9 +12,7 @@ export function Header() {
   return (
     <View style={styles.container}>
       <View style={styles.left}>
-        <View style={styles.logo}>
-          <Text style={styles.logoText}>T</Text>
-        </View>
+        <BrandLogo size={100} />
         <Text style={styles.title}>
           <Text style={styles.titleToro}>Toro</Text>
           <Text style={styles.titleCampus}> CAMPUS CONNECT</Text>
@@ -42,19 +43,6 @@ const styles = StyleSheet.create({
     gap: DashboardSpacing.headerGap,
     flex: 1,
   },
-  logo: {
-    width: 36,
-    height: 36,
-    borderRadius: 8,
-    backgroundColor: DashboardColors.primary,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  logoText: {
-    color: '#FFFFFF',
-    fontSize: 18,
-    fontWeight: '700',
-  },
   title: {
     flexShrink: 0,
   },
@@ -62,7 +50,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '700',
     fontStyle: 'italic',
-    color: DashboardColors.textDark,
+    color: Brand.accent,
   },
   titleCampus: {
     fontSize: 14,

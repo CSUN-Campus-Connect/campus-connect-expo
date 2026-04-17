@@ -1,6 +1,5 @@
 /**
- * Placeholder API / handlers for dashboard.
- * Replace with real endpoints and logic when wiring backend.
+ * Navigation handlers for dashboard — mirrors web sidebar targets (`DashboardSidebar` nav items).
  */
 
 import { router } from 'expo-router';
@@ -8,47 +7,52 @@ import { router } from 'expo-router';
 import { requestOpenMessagesInbox } from '@/messages/messagesTabIntent';
 
 export function openSettings(): void {
-  console.log('Open settings');
+  router.push('/settings' as never);
 }
 
 export function finishSetup(): void {
-  console.log('Finish setup pressed');
+  router.push('/profile' as never);
 }
 
 export function navigateToSocial(): void {
-  console.log('Navigate to Social');
+  router.push('/social' as never);
 }
 
 export function navigateToEvents(): void {
-  console.log('Navigate to Events');
+  router.push('/events' as never);
 }
 
 export function navigateToClubs(): void {
-  console.log('Navigate to Clubs');
+  router.push('/clubs' as never);
 }
 
 export function navigateToAcademics(): void {
-  console.log('Navigate to Academics');
+  router.push('/academics' as never);
 }
 
 export function navigateToMarketplace(): void {
-  console.log('Navigate to Marketplace');
+  router.push('/marketplace' as never);
 }
 
 export function navigateToSRC(): void {
-  console.log('Navigate to SRC');
+  router.push('/student-rec' as never);
+}
+
+export function navigateToMessages(): void {
+  requestOpenMessagesInbox();
+  router.navigate('/messages' as never);
 }
 
 export function viewProfile(): void {
-  console.log('View Profile');
+  router.push('/profile' as never);
 }
 
 export function needHelp(): void {
-  console.log('Need Help? — use ProfileBar navigation to /chat');
+  router.push('/chat');
 }
 
 export function goToHome(): void {
-  router.push('/dashboard');
+  router.push('/home' as never);
 }
 
 export function goToMessages(): void {
@@ -57,5 +61,9 @@ export function goToMessages(): void {
 }
 
 export function goToMore(): void {
-  console.log('Go to More');
+  router.push('/more' as never);
+}
+
+export function goToCustomizeBottomBar(): void {
+  router.push('/customize-bottom-bar' as never);
 }

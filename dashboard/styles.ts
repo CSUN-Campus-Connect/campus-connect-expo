@@ -1,11 +1,17 @@
 import { StyleSheet } from 'react-native';
 
+import { Brand } from '@/constants/brand';
+
 export const DashboardColors = {
-  primary: '#B0003A',
+  /** Matches web dashboard sidebar (`#A80532`). */
+  primary: Brand.primary,
+  accent: Brand.accent,
   textDark: '#333333',
   textMedium: '#6B7280',
   textLight: '#9CA3AF',
   background: '#FFFFFF',
+  /** Web `dashboard/page.tsx` main `<Box>` */
+  mainBackground: '#fafafb',
   cardBackground: '#F4F4F5',
   cardBorder: '#E5E7EB',
   avatarBg: '#1F2937',
@@ -28,7 +34,8 @@ export const dashboardStyles = StyleSheet.create({
     backgroundColor: DashboardColors.background,
   },
   scrollContent: {
-    paddingBottom: 24,
+    /** Shell adds outer padding; keep this for nested scrolls that reuse the style. */
+    paddingBottom: 0,
   },
   emptyMiddle: {
     minHeight: 24,

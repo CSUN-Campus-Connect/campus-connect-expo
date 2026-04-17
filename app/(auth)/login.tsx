@@ -1,10 +1,50 @@
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
-import { authService } from '../../services/auth.service';
-import { useAuth } from '../../context/AuthContext';
+import {
+  ActivityIndicator,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  useWindowDimensions,
+  View,
+} from 'react-native';
+
+import { AuthChrome, AuthGlassCard } from '@/components/auth/AuthChrome';
+import { BrandLogo } from '@/components/brand/BrandLogo';
+import { Brand } from '@/constants/brand';
+import { useAuth } from '@/context/AuthContext';
+import { authService } from '@/services/auth.service';
+
+function friendlyLoginError(err: unknown): string {
+  const e = err as {
+    response?: { data?: { message?: string; error?: string }; status?: number };
+    code?: string;
+  };
+  const msg = e?.response?.data?.message ?? e?.response?.data?.error;
+  const status = e?.response?.status;
+  const lower = (msg ?? '').toLowerCase();
+
+  if (msg) {
+    if (lower.includes('verify') || lower.includes('verification')) {
+      return 'Please verify your email before logging in. Check your inbox for the verification link.';
+    }
+    return String(msg);
+  }
+  if (e?.code === 'ERR_NETWORK' || !e?.response) {
+    return "We couldn’t reach the sign-in server. Check your internet connection and try again.";
+  }
+  if (status === 401) {
+    return 'Invalid email or password. Please try again.';
+  }
+  if (status) {
+    return `Login failed (${status}). Please try again.`;
+  }
+  return 'Login failed. Please try again.';
+}
 
 export default function LoginScreen() {
+  const { width: windowWidth } = useWindowDimensions();
   const router = useRouter();
   const { signIn } = useAuth();
   const [email, setEmail] = useState('');
@@ -12,146 +52,145 @@ export default function LoginScreen() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
+  /** Scroll padding + card padding so the logo never overflows the glass card (`overflow: hidden`). */
+  const logoSize = Math.min(270, Math.max(160, windowWidth - 88));
+
   const handleLogin = async () => {
     setError('');
     setLoading(true);
     try {
       const res = await authService.login({ email, password });
       await signIn(res.token);
-    } catch (e: any) {
-      const msg = e?.response?.data?.message ?? e?.response?.data?.error;
-      const status = e?.response?.status;
-      if (msg) {
-        setError(msg);
-      } else if (e?.code === 'ERR_NETWORK' || !e?.response) {
-        setError('Cannot reach server. Check that the backend is running and EXPO_PUBLIC_API_URL in .env uses your computer\'s IP (not localhost).');
-      } else if (status === 401) {
-        setError('Invalid email or password.');
-      } else if (status) {
-        setError(`Login failed (${status}). Please try again.`);
-      } else {
-        setError('Login failed. Please try again.');
-      }
+    } catch (e: unknown) {
+      setError(friendlyLoginError(e));
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>CampusConnect</Text>
-      <Text style={styles.subtitle}>Sign in to your account</Text>
+    <AuthChrome>
+      <AuthGlassCard>
+        <View style={styles.hero}>
+          <BrandLogo variant="lockup" size={logoSize} style={styles.logoMark} />
+          <Text style={styles.tagline}>Sign in with your CSUN email</Text>
+        </View>
 
-      {error ? <Text style={styles.error}>{error}</Text> : null}
+        {error ? <Text style={styles.error}>{error}</Text> : null}
 
-      <TextInput
-        style={styles.input}
-        placeholder="CSUN Email"
-        placeholderTextColor="#999"
-        value={email}
-        onChangeText={setEmail}
-        autoCapitalize="none"
-        keyboardType="email-address"
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        placeholderTextColor="#999"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
+        <TextInput
+          style={styles.input}
+          placeholder="CSUN Email"
+          placeholderTextColor="rgba(255,255,255,0.45)"
+          value={email}
+          onChangeText={setEmail}
+          autoCapitalize="none"
+          keyboardType="email-address"
+          autoCorrect={false}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          placeholderTextColor="rgba(255,255,255,0.45)"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry
+        />
 
-      <TouchableOpacity
-        style={[styles.button, loading && styles.buttonDisabled]}
-        onPress={handleLogin}
-        disabled={loading}
-      >
-        <Text style={styles.buttonText}>{loading ? 'Signing in...' : 'Login'}</Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.primaryButton, loading && styles.primaryButtonDisabled]}
+          onPress={handleLogin}
+          disabled={loading}
+        >
+          {loading ? (
+            <ActivityIndicator color="#fff" />
+          ) : (
+            <Text style={styles.primaryButtonText}>Log in</Text>
+          )}
+        </TouchableOpacity>
 
-      <TouchableOpacity
-        style={styles.guestButton}
-        onPress={() => router.replace('/dashboard')}
-        disabled={loading}
-      >
-        <Text style={styles.guestButtonText}>Continue as guest</Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.guestButton}
+          onPress={() => router.replace('/home' as never)}
+          disabled={loading}
+        >
+          <Text style={styles.guestButtonText}>Continue as guest</Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => router.push('/(auth)/register')}>
-        <Text style={styles.link}>Don't have an account? <Text style={styles.linkBold}>Sign up</Text></Text>
-      </TouchableOpacity>
-    </View>
+        <TouchableOpacity onPress={() => router.push('/(auth)/register')} disabled={loading}>
+          <Text style={styles.footer}>
+            Don&apos;t have an account? <Text style={styles.footerBold}>Sign up</Text>
+          </Text>
+        </TouchableOpacity>
+      </AuthGlassCard>
+    </AuthChrome>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    padding: 28,
-    backgroundColor: '#fff',
+  hero: {
+    alignItems: 'center',
+    marginBottom: 22,
   },
-  title: {
-    fontSize: 30,
-    fontWeight: '700',
-    color: '#A60000',
-    marginBottom: 6,
+  logoMark: {
+    marginBottom: 18,
   },
-  subtitle: {
-    fontSize: 15,
-    color: '#666',
-    marginBottom: 28,
+  tagline: {
+    fontSize: 14,
+    color: 'rgba(255,255,255,0.55)',
+    textAlign: 'center',
   },
   error: {
-    color: 'crimson',
+    color: '#FFB4B4',
     marginBottom: 12,
     fontSize: 14,
+    lineHeight: 20,
   },
   input: {
-    backgroundColor: '#f5f5f5',
-    borderRadius: 999,
-    padding: 14,
-    paddingHorizontal: 20,
+    backgroundColor: 'rgba(0,0,0,0.25)',
+    borderRadius: 14,
+    paddingVertical: 14,
+    paddingHorizontal: 16,
     marginBottom: 12,
-    fontSize: 15,
+    fontSize: 16,
+    color: '#FFFFFF',
     borderWidth: 1,
-    borderColor: '#e0e0e0',
+    borderColor: 'rgba(255,255,255,0.2)',
   },
-  button: {
-    backgroundColor: '#A60000',
+  primaryButton: {
+    backgroundColor: Brand.accent,
     borderRadius: 999,
-    padding: 15,
+    paddingVertical: 15,
     alignItems: 'center',
     marginTop: 8,
-    marginBottom: 16,
+    marginBottom: 14,
   },
-  buttonDisabled: {
-    opacity: 0.6,
+  primaryButtonDisabled: {
+    opacity: 0.65,
   },
-  buttonText: {
+  primaryButtonText: {
     color: '#fff',
-    fontWeight: '600',
+    fontWeight: '700',
     fontSize: 16,
   },
-  link: {
-    textAlign: 'center',
-    color: '#666',
-    fontSize: 14,
-  },
-  linkBold: {
-    color: '#A60000',
-    fontWeight: '600',
-  },
   guestButton: {
-    paddingVertical: 14,
+    paddingVertical: 12,
     alignItems: 'center',
     marginBottom: 8,
   },
   guestButtonText: {
-    color: '#666',
+    color: 'rgba(255,255,255,0.75)',
     fontSize: 15,
     fontWeight: '600',
     textDecorationLine: 'underline',
+  },
+  footer: {
+    textAlign: 'center',
+    color: 'rgba(255,255,255,0.55)',
+    fontSize: 14,
+  },
+  footerBold: {
+    color: '#FFFFFF',
+    fontWeight: '700',
   },
 });

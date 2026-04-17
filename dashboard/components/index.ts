@@ -3,3 +3,7 @@ export { SetupBanner } from './SetupBanner';
 export { MenuList } from './MenuList';
 export { ProfileBar } from './ProfileBar';
 export { BottomTabs } from './BottomTabs';
+export { DashboardSidebar } from './DashboardSidebar';
+export { DashboardHomeContent } from './DashboardHomeContent';
+export { DashboardShell } from './DashboardShell';
+export { DashboardMobileDrawer } from './DashboardMobileDrawer';

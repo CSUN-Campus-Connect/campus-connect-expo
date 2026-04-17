@@ -492,7 +492,7 @@ export function MessagesScreen() {
         </View>
       </KeyboardAvoidingView>
 
-      <BottomTabs activeTab="messages" onMessagesHubPress={resetToMessagingHub} />
+      <BottomTabs onMessagesHubPress={resetToMessagingHub} />
 
       <ThreadMenuModal
         visible={menuOpen}
