@@ -4,6 +4,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import {
   navigateToSocial,
+  navigateToMessages,
   navigateToEvents,
   navigateToClubs,
   navigateToAcademics,
@@ -19,8 +20,10 @@ type MenuItemConfig = {
   onPress: () => void;
 };
 
+/** Order matches web `DashboardSidebar` (`navItems`) after Home. */
 const MENU_ITEMS: MenuItemConfig[] = [
   { id: 'social', label: 'Social', icon: 'chatbubbles-outline', onPress: navigateToSocial },
+  { id: 'messages', label: 'Messages', icon: 'mail-outline', onPress: navigateToMessages },
   { id: 'events', label: 'Events', icon: 'calendar-outline', onPress: navigateToEvents },
   { id: 'clubs', label: 'Clubs', icon: 'people-outline', onPress: navigateToClubs },
   { id: 'academics', label: 'Academics', icon: 'school-outline', onPress: navigateToAcademics },

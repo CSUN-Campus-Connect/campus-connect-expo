@@ -1,0 +1,263 @@
+/**
+ * Seed + mock data aligned with `campus-connect-client/.../academics/shared/mockData.ts`.
+ */
+
+import type { MajorPlan, NoteFolder, SemesterBucket, StudyGroup, UniCartClass, UniCartProfile } from './constants';
+
+export const seedSemesters: SemesterBucket[] = [
+  {
+    id: 'Spring 2026',
+    courses: [
+      {
+        id: 'seed-comp333',
+        subject: 'COMP',
+        number: '333',
+        title: 'Concepts of Programming Languages',
+        professor: 'Prof. Verma',
+        units: 3,
+        days: ['Mon', 'Wed'],
+        startTime: '10:00',
+        endTime: '11:15',
+        semester: 'Spring 2026',
+        isOnline: false,
+        location: 'JD 1600',
+        sectionId: '12345',
+        cardColor: 'default',
+        notes: [],
+        resources: [],
+        assignments: [
+          {
+            id: 'a1',
+            title: 'Homework 1 – Lambda Calculus',
+            dueDate: '2026-02-10T23:59:00',
+            completed: true,
+            priority: 'medium',
+          },
+          {
+            id: 'a2',
+            title: 'Homework 2 – Type Systems',
+            dueDate: '2026-04-28T23:59:00',
+            completed: false,
+            priority: 'high',
+          },
+          {
+            id: 'a3',
+            title: 'Project Proposal',
+            dueDate: '2026-05-15T23:59:00',
+            completed: false,
+            priority: 'high',
+          },
+        ],
+        exams: [
+          { id: 'e1', title: 'Midterm Exam', date: '2026-03-10T10:00:00', type: 'midterm', location: 'JD 1600' },
+          { id: 'e2', title: 'Final Exam', date: '2026-05-14T10:00:00', type: 'final', location: 'JD 1600' },
+        ],
+      },
+      {
+        id: 'seed-math340',
+        subject: 'MATH',
+        number: '340',
+        title: 'Introduction to Probability and Statistics',
+        professor: 'Dr. Smith',
+        units: 3,
+        days: ['Tue', 'Thu'],
+        startTime: '12:30',
+        endTime: '13:45',
+        semester: 'Spring 2026',
+        isOnline: false,
+        location: 'SN 120',
+        sectionId: '23456',
+        cardColor: 'blue',
+        notes: [],
+        resources: [],
+        assignments: [
+          {
+            id: 'a4',
+            title: 'Problem Set 3',
+            dueDate: '2026-04-20T23:59:00',
+            completed: false,
+            priority: 'medium',
+          },
+          {
+            id: 'a5',
+            title: 'Problem Set 4',
+            dueDate: '2026-05-05T23:59:00',
+            completed: false,
+            priority: 'low',
+          },
+        ],
+        exams: [
+          { id: 'e3', title: 'Quiz 2', date: '2026-04-08T12:30:00', type: 'quiz', location: 'SN 120' },
+          { id: 'e4', title: 'Midterm', date: '2026-04-12T12:30:00', type: 'midterm', location: 'SN 120' },
+        ],
+      },
+      {
+        id: 'seed-comp356',
+        subject: 'COMP',
+        number: '356',
+        title: 'File Structures & Object Oriented Programming',
+        professor: 'Dr. Chen',
+        units: 3,
+        days: ['Mon', 'Wed', 'Fri'],
+        startTime: '09:00',
+        endTime: '09:50',
+        semester: 'Spring 2026',
+        isOnline: false,
+        location: 'JD 2208',
+        sectionId: '34567',
+        cardColor: 'emerald',
+        notes: [],
+        resources: [],
+        assignments: [
+          {
+            id: 'a6',
+            title: 'Lab 4 – B-Trees',
+            dueDate: '2026-04-14T23:59:00',
+            completed: false,
+            priority: 'high',
+          },
+          {
+            id: 'a7',
+            title: 'Final Project',
+            dueDate: '2026-05-10T23:59:00',
+            completed: false,
+            priority: 'high',
+          },
+        ],
+        exams: [{ id: 'e5', title: 'Quiz 1', date: '2026-04-16T09:00:00', type: 'quiz', location: 'JD 2208' }],
+      },
+    ],
+  },
+];
+
+export const seedSelectedSemesterId = 'Spring 2026';
+
+export const mockMajors: MajorPlan[] = [
+  { plan_id: 'cs', plan_title: 'Computer Science', academic_groups_title: 'Engineering and Computer Science' },
+  { plan_id: 'bus', plan_title: 'Business Administration', academic_groups_title: 'David Nazarian College of Business' },
+];
+
+export const mockClassLibrary: UniCartClass[] = [
+  {
+    id: 'c1',
+    subject: 'COMP',
+    number: '322',
+    title: 'Internet & WWW',
+    professor: 'Dr. Rose',
+    units: 3,
+    semester: 'Spring 2026',
+    isOnline: false,
+    days: ['Mon', 'Wed'],
+    startTime: '14:00',
+    endTime: '15:15',
+    section: '01',
+    seats: 35,
+    seatsAvailable: 8,
+  },
+  {
+    id: 'c2',
+    subject: 'COMP',
+    number: '380',
+    title: 'Software Engineering',
+    professor: 'Dr. Kazerouni',
+    units: 3,
+    semester: 'Spring 2026',
+    isOnline: false,
+    days: ['Tue', 'Thu'],
+    startTime: '09:30',
+    endTime: '10:45',
+    section: '01',
+    seats: 40,
+    seatsAvailable: 2,
+  },
+];
+
+export const mockStudentProfiles: UniCartProfile[] = [
+  {
+    id: 'u1',
+    name: 'Alex Rivera',
+    major: 'Computer Science',
+    year: 'Junior',
+    classes: [mockClassLibrary[0], mockClassLibrary[1]],
+  },
+];
+
+export const mockStudyGroups: StudyGroup[] = [
+  {
+    id: 'sg1',
+    courseSubject: 'COMP',
+    courseNumber: '333',
+    topic: 'Midterm Review – Type Systems & Lambda Calculus',
+    tags: ['STEM', 'Computer Science'],
+    dateTime: new Date(Date.now() + 2 * 86400000).toISOString(),
+    location: 'Oviatt Library – Room 2',
+    isVirtual: false,
+    members: [
+      { id: 'm1', name: 'alex@my.csun.edu' },
+      { id: 'm2', name: 'jordan@my.csun.edu' },
+    ],
+    createdBy: 'alex@my.csun.edu',
+    createdAt: new Date().toISOString(),
+    maxMembers: 6,
+    notes: 'Bring your typed notes from weeks 1-7.',
+    expiresAt: new Date(Date.now() + 5 * 86400000).toISOString(),
+    isPrivate: false,
+  },
+  {
+    id: 'sg2',
+    courseSubject: 'MATH',
+    courseNumber: '340',
+    topic: 'Probability Distributions Deep Dive',
+    tags: ['STEM', 'Math'],
+    dateTime: new Date(Date.now() + 4 * 86400000).toISOString(),
+    location: 'Zoom',
+    isVirtual: true,
+    meetingLink: 'https://csun.zoom.us/j/123456',
+    members: [{ id: 'm3', name: 'sam@my.csun.edu' }],
+    createdBy: 'sam@my.csun.edu',
+    createdAt: new Date().toISOString(),
+    maxMembers: 5,
+    expiresAt: new Date(Date.now() + 7 * 86400000).toISOString(),
+    isPrivate: true,
+    invitedEmails: ['alex@my.csun.edu', 'jordan@my.csun.edu'],
+  },
+];
+
+export const mockNoteFolders: NoteFolder[] = [
+  {
+    id: 'nf1',
+    topic: 'Lambda Calculus Cheat Sheet',
+    description: 'Compact reference for α/β/η conversions and common reductions.',
+    subject: 'COMP',
+    courseNumber: '333',
+    createdAt: new Date(Date.now() - 86400000 * 6).toISOString(),
+    createdByEmail: 'alex@my.csun.edu',
+    visibility: 'public',
+    tags: ['STEM', 'Computer Science'],
+    savedByMe: true,
+  },
+  {
+    id: 'nf2',
+    topic: 'B-Tree Visual Guides',
+    description: 'Visual notes for insertions, deletions, and rebalancing.',
+    subject: 'COMP',
+    courseNumber: '356',
+    createdAt: new Date(Date.now() - 86400000 * 12).toISOString(),
+    createdByEmail: 'jordan@my.csun.edu',
+    visibility: 'public',
+    tags: ['STEM', 'Computer Science'],
+  },
+  {
+    id: 'nf3',
+    topic: 'Probability Distributions Practice',
+    description: 'Worked examples and practice sets for common distributions.',
+    subject: 'MATH',
+    courseNumber: '340',
+    createdAt: new Date(Date.now() - 86400000 * 3).toISOString(),
+    createdByEmail: 'sam@my.csun.edu',
+    visibility: 'private',
+    invitedEmails: ['alex@my.csun.edu', 'jordan@my.csun.edu'],
+    tags: ['STEM', 'Math'],
+    savedByMe: true,
+  },
+];
