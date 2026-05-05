@@ -1,0 +1,202 @@
+import { StyleSheet } from 'react-native';
+
+export const MAROON = '#B4002E';
+
+export const clubsScreenStyles = StyleSheet.create({
+  safe: {
+    flex: 1,
+    backgroundColor: '#3a0010',
+  },
+  topBar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    gap: 8,
+  },
+  backPill: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderRadius: 999,
+    backgroundColor: 'rgba(255,255,255,0.12)',
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.25)',
+  },
+  backPillText: {
+    color: '#fff',
+    fontWeight: '800',
+    fontSize: 13,
+    letterSpacing: 0.3,
+  },
+  scroll: {
+    flex: 1,
+    backgroundColor: 'transparent',
+  },
+  scrollContent: {
+    paddingBottom: 32,
+  },
+  hero: {
+    paddingHorizontal: 16,
+    paddingTop: 8,
+    paddingBottom: 12,
+    alignItems: 'center',
+  },
+  heroTitle: {
+    color: '#fff',
+    fontSize: 36,
+    fontWeight: '900',
+    textAlign: 'center',
+    letterSpacing: -1,
+    textShadowColor: 'rgba(220,20,40,0.55)',
+    textShadowOffset: { width: 0, height: 4 },
+    textShadowRadius: 24,
+  },
+  heroSubtitle: {
+    marginTop: 10,
+    color: 'rgba(255,255,255,0.60)',
+    fontSize: 15,
+    textAlign: 'center',
+    maxWidth: 520,
+    lineHeight: 22,
+    fontWeight: '400',
+  },
+  galleryWrap: {
+    width: '100%',
+    marginTop: 20,
+  },
+  tabRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    gap: 10,
+    marginTop: 16,
+  },
+  tabPrimary: {
+    paddingHorizontal: 18,
+    paddingVertical: 10,
+    borderRadius: 999,
+    backgroundColor: 'rgba(255,255,255,0.92)',
+  },
+  tabPrimaryText: {
+    color: MAROON,
+    fontWeight: '900',
+    fontSize: 14,
+  },
+  tabGhost: {
+    paddingHorizontal: 18,
+    paddingVertical: 10,
+    borderRadius: 999,
+    backgroundColor: 'rgba(255,255,255,0.10)',
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.20)',
+  },
+  tabGhostText: {
+    color: '#fff',
+    fontWeight: '900',
+    fontSize: 14,
+  },
+  tabCreate: {
+    paddingHorizontal: 18,
+    paddingVertical: 10,
+    borderRadius: 999,
+    backgroundColor: 'rgba(180,0,46,0.22)',
+    borderWidth: 1,
+    borderColor: 'rgba(180,0,46,0.45)',
+  },
+  tabCreateText: {
+    color: 'rgba(255,200,200,0.95)',
+    fontWeight: '900',
+    fontSize: 14,
+  },
+  filterSection: {
+    paddingHorizontal: 12,
+    paddingBottom: 8,
+  },
+  searchRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+  },
+  searchInput: {
+    flex: 1,
+    borderRadius: 999,
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.45)',
+    backgroundColor: 'rgba(255,255,255,0.08)',
+    color: '#fff',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    fontSize: 15,
+  },
+  clearBtn: {
+    paddingHorizontal: 14,
+    paddingVertical: 10,
+    borderRadius: 999,
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.20)',
+    backgroundColor: 'rgba(255,255,255,0.10)',
+  },
+  clearBtnText: {
+    color: '#fff',
+    fontWeight: '800',
+    fontSize: 13,
+  },
+  chipScroll: {
+    marginTop: 14,
+    paddingBottom: 4,
+  },
+  chipRowInner: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 8,
+  },
+  chip: {
+    paddingHorizontal: 12,
+    paddingVertical: 7,
+    borderRadius: 999,
+    borderWidth: 1,
+  },
+  chipText: {
+    fontSize: 12,
+    fontWeight: '800',
+    letterSpacing: 0.3,
+  },
+  metaRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: 12,
+  },
+  metaLeft: {
+    color: 'rgba(255,255,255,0.55)',
+    fontWeight: '700',
+    fontSize: 13,
+  },
+  metaRight: {
+    color: 'rgba(255,255,255,0.35)',
+    fontWeight: '600',
+    fontSize: 11,
+  },
+  gridSection: {
+    paddingHorizontal: 12,
+    paddingTop: 4,
+  },
+  divider: {
+    height: StyleSheet.hairlineWidth,
+    backgroundColor: 'rgba(255,255,255,0.07)',
+    marginBottom: 12,
+  },
+  empty: {
+    alignItems: 'center',
+    paddingVertical: 48,
+    gap: 12,
+  },
+  emptyText: {
+    color: 'rgba(255,80,80,0.55)',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+});

@@ -1,0 +1,202 @@
+import { StyleSheet } from 'react-native';
+
+import { Brand } from '@/constants/brand';
+
+export const profileScreenStyles = StyleSheet.create({
+  intro: {
+    fontSize: 15,
+    lineHeight: 22,
+    color: '#6B7280',
+    marginBottom: 16,
+  },
+  bannerWrap: {
+    height: 152,
+    borderRadius: 12,
+    overflow: 'hidden',
+    marginBottom: -44,
+    backgroundColor: Brand.primary,
+  },
+  bannerImg: {
+    width: '100%',
+    height: '100%',
+  },
+  avatarRow: {
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    paddingHorizontal: 4,
+    marginBottom: 12,
+  },
+  avatar: {
+    width: 96,
+    height: 96,
+    borderRadius: 48,
+    borderWidth: 4,
+    borderColor: '#fff',
+    backgroundColor: Brand.surfaceMuted,
+  },
+  nameBlock: {
+    flex: 1,
+    marginLeft: 12,
+    paddingBottom: 4,
+  },
+  displayName: {
+    fontSize: 22,
+    fontWeight: '800',
+    color: '#111',
+    letterSpacing: -0.3,
+  },
+  subRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    gap: 8,
+    marginTop: 4,
+  },
+  username: {
+    fontSize: 15,
+    color: '#6B7280',
+    fontWeight: '500',
+  },
+  pronouns: {
+    fontSize: 13,
+    color: '#9CA3AF',
+  },
+  verifiedPill: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    backgroundColor: 'rgba(168,5,50,0.08)',
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    borderRadius: 8,
+  },
+  verifiedText: {
+    fontSize: 12,
+    fontWeight: '700',
+    color: Brand.primary,
+  },
+  statsRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    paddingVertical: 14,
+    marginBottom: 16,
+    backgroundColor: '#fff',
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: Brand.border,
+  },
+  statItem: {
+    alignItems: 'center',
+    minWidth: 72,
+  },
+  statNum: {
+    fontSize: 18,
+    fontWeight: '800',
+    color: '#111',
+  },
+  statLabel: {
+    fontSize: 12,
+    color: '#6B7280',
+    marginTop: 2,
+  },
+  bio: {
+    fontSize: 15,
+    lineHeight: 22,
+    color: '#374151',
+    marginBottom: 14,
+  },
+  sectionTitle: {
+    fontSize: 13,
+    fontWeight: '700',
+    color: '#9CA3AF',
+    textTransform: 'uppercase',
+    letterSpacing: 0.6,
+    marginBottom: 10,
+  },
+  chipWrap: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 8,
+    marginBottom: 18,
+  },
+  chip: {
+    backgroundColor: 'rgba(168,5,50,0.08)',
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 999,
+  },
+  chipText: {
+    fontSize: 13,
+    fontWeight: '600',
+    color: Brand.primary,
+  },
+  metaCard: {
+    backgroundColor: '#fff',
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: Brand.border,
+    padding: 14,
+    marginBottom: 18,
+    gap: 12,
+  },
+  metaRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+  },
+  metaText: {
+    flex: 1,
+    fontSize: 14,
+    color: '#374151',
+  },
+  metaMuted: {
+    fontSize: 13,
+    color: '#9CA3AF',
+  },
+  postCard: {
+    backgroundColor: '#fff',
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: Brand.border,
+    padding: 14,
+    marginBottom: 10,
+  },
+  postText: {
+    fontSize: 15,
+    lineHeight: 22,
+    color: '#111',
+    marginBottom: 10,
+  },
+  postMeta: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  postTime: {
+    fontSize: 12,
+    color: '#9CA3AF',
+  },
+  postEngage: {
+    fontSize: 12,
+    color: '#6B7280',
+    fontWeight: '500',
+  },
+  card: {
+    backgroundColor: Brand.surfaceMuted,
+    borderRadius: 12,
+    padding: 16,
+    borderWidth: 1,
+    borderColor: Brand.border,
+  },
+  cardTitle: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: Brand.primary,
+    marginBottom: 8,
+  },
+  cardBody: {
+    fontSize: 14,
+    lineHeight: 20,
+    color: Brand.textMuted,
+  },
+});

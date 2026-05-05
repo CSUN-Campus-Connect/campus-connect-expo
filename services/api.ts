@@ -1,6 +1,7 @@
 import axios from 'axios';
-import * as SecureStore from 'expo-secure-store';
+
 import { API_BASE_URL } from '../constants/config';
+import { storage } from './storage';
 
 const TOKEN_KEY = 'cc_auth_token';
 
@@ -12,7 +13,7 @@ const api = axios.create({
 });
 
 api.interceptors.request.use(async (config) => {
-  const token = await SecureStore.getItemAsync(TOKEN_KEY);
+  const token = await storage.getItem(TOKEN_KEY);
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
@@ -23,7 +24,7 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      SecureStore.deleteItemAsync(TOKEN_KEY);
+      storage.removeItem(TOKEN_KEY);
     }
     return Promise.reject(error);
   }
